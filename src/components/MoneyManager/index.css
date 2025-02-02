@@ -33,3 +33,45 @@
   color: #0b69ff;
   font-family: 'Roboto';
 }
+.add-transaction-container {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #334155;
+  height: 300px;
+  width: 80%;
+}
+.add-transaction-heading {
+  color: #334155;
+  font-size: 25px;
+  font-family: 'Roboto';
+}
+.input-element-container {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+.inputElement {
+  height: 28px;
+  width: 90%;
+}
+.add-btn {
+  background-color: #0b69ff;
+  color: #ffffff;
+  font-family: 'Roboto';
+  height: 37px;
+  width: 70px;
+  border-width: 0px;
+  border-radius: 5px;
+}
+.history-table {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #334155;
+  height: 300px;
+  width: 80%;
+}
+.table-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

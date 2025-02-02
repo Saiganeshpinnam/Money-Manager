@@ -1,8 +1,12 @@
 import {Component} from 'react'
 
+import {v4 as uuidv4} from 'uuid'
+
 import './index.css'
 
 import MoneyDetails from '../MoneyDetails'
+
+import TransactionItem from '../TransactionItem'
 
 const transactionTypeOptions = [
   {
@@ -16,8 +20,54 @@ const transactionTypeOptions = [
 ]
 
 // Write your code here
+const initialTransactionsList = []
+
 class MoneyManager extends Component {
+  state = {
+    transactionList: initialTransactionsList,
+    title: '',
+    amount: '',
+    type: '',
+  }
+
+  onAddTransaction = event => {
+    event.preventDefault()
+    const {title, amount, type} = this.state
+    const newTransaction = {
+      id: uuidv4,
+      title,
+      amount,
+      type,
+    }
+
+    this.setState(prevState => ({
+      transactionList: [...prevState.transactionList, newTransaction],
+      title: '',
+      amount: '',
+      type: '',
+    }))
+  }
+
+  onChangeTitle = event => {
+    this.setState({
+      title: event.target.value,
+    })
+  }
+
+  onChangeAmount = event => {
+    this.setState({
+      amount: event.target.value,
+    })
+  }
+
+  onSelectType = event => {
+    this.setState({
+      type: event.target.value,
+    })
+  }
+
   render() {
+    const {transactionList} = this.state
     return (
       <div className="bg-container">
         <div className="money-manager-card-container">
@@ -29,6 +79,63 @@ class MoneyManager extends Component {
         </div>
 
         <MoneyDetails transactionTypeOptions={transactionTypeOptions} />
+
+        <div className="add-transaction-container">
+          <h1 className="add-transaction-heading">Add Transaction</h1>
+          <form onSubmit={this.onAddTransaction}>
+            <div className="input-element-container">
+              <label htmlFor="title">TITLE</label>
+              <input
+                type="text"
+                className="form-control inputElement"
+                id="title"
+                placeholder="TITLE"
+                onChange={this.onChangeTitle}
+              />
+            </div>
+
+            <div className="input-element-container">
+              <label htmlFor="amount">AMOUNT</label>
+              <input
+                type="text"
+                className="form-control inputElement"
+                id="amount"
+                placeholder="AMOUNT"
+                onChange={this.onChangeAmount}
+              />
+            </div>
+
+            <div className="input-element-container">
+              <label htmlFor="type">TYPE</label>
+              <select
+                id="type"
+                className="form-control inputElement"
+                onChange={this.onSelectType}
+              >
+                <option>{transactionTypeOptions[0].displayText}</option>
+                <option>{transactionTypeOptions[1].displayText}</option>
+              </select>
+            </div>
+            <button type="submit" className="add-btn">
+              Add
+            </button>
+          </form>
+        </div>
+
+        <ul className="history-table">
+          <h1>History</h1>
+          <li className="table-header">
+            <p>Title</p>
+            <p>Amount</p>
+            <p>Type</p>
+          </li>
+          {transactionList.map(eachTransaction => (
+            <TransactionItem
+              key={eachTransaction.id}
+              eachTransaction={eachTransaction}
+            />
+          ))}
+        </ul>
       </div>
     )
   }

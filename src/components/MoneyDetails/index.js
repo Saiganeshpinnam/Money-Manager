@@ -5,7 +5,7 @@ const MoneyDetails = props => {
   const {transactionTypeOptions} = props
 
   return (
-    <div>
+    <div className="money-details-bg-container">
       <div className="money-details-container balance-container">
         <img
           src="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
