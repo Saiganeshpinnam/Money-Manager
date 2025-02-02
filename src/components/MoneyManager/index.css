@@ -1,0 +1,35 @@
+/* Write your CSS here */
+
+.bg-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.money-manager-card-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/money-manager/money-manager-bg.png');
+  height: 30%;
+  width: 90%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.account-holder-name {
+  font-size: 20px;
+  color: #475569;
+  font-family: 'Roboto';
+}
+.greetings {
+  font-size: 15px;
+  color: #475569;
+  font-family: 'Roboto';
+}
+.money-manager {
+  font-size: 18px;
+  color: #0b69ff;
+  font-family: 'Roboto';
+}
