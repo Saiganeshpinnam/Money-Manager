@@ -30,14 +30,18 @@ class MoneyManager extends Component {
     type: '',
   }
 
-  onAddTransaction = event => {
+  onSubmitTransaction = event => {
     event.preventDefault()
+  }
+
+  onAddTransaction = () => {
     const {title, amount, type} = this.state
     const newTransaction = {
       id: uuidv4,
       title,
       amount,
       type,
+      isTransactionAdded: false,
     }
 
     this.setState(prevState => ({
@@ -45,6 +49,13 @@ class MoneyManager extends Component {
       title: '',
       amount: '',
       type: '',
+    }))
+
+    this.setState(prevState => ({
+      transactionList: prevState.transactionList.map(eachTransaction => ({
+        ...eachTransaction,
+        isTransactionAdded: !eachTransaction.isTransactionAdded,
+      })),
     }))
   }
 
@@ -82,7 +93,7 @@ class MoneyManager extends Component {
 
         <div className="add-transaction-container">
           <h1 className="add-transaction-heading">Add Transaction</h1>
-          <form onSubmit={this.onAddTransaction}>
+          <form onSubmit={this.onSubmitTransaction}>
             <div className="input-element-container">
               <label htmlFor="title">TITLE</label>
               <input
@@ -116,7 +127,11 @@ class MoneyManager extends Component {
                 <option>{transactionTypeOptions[1].displayText}</option>
               </select>
             </div>
-            <button type="submit" className="add-btn">
+            <button
+              type="submit"
+              className="add-btn"
+              onClick={this.onAddTransaction}
+            >
               Add
             </button>
           </form>

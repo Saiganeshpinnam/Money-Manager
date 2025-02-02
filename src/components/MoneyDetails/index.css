@@ -44,13 +44,11 @@
   font-family: 'Roboto';
 }
 
-
-
-@media screen and (min-width:768px){
-  .money-details-bg-container{
+@media screen and (min-width: 768px) {
+  .money-details-bg-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
+  }
 }

@@ -70,7 +70,7 @@
   height: 300px;
   width: 80%;
 }
-.table-header{
+.table-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
