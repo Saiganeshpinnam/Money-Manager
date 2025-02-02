@@ -37,7 +37,7 @@ class MoneyManager extends Component {
   onAddTransaction = () => {
     const {title, amount, type} = this.state
     const newTransaction = {
-      id: uuidv4,
+      id: uuidv4(),
       title,
       amount,
       type,
@@ -48,7 +48,7 @@ class MoneyManager extends Component {
       transactionList: [...prevState.transactionList, newTransaction],
       title: '',
       amount: '',
-      type: '',
+      type: 'INCOME',
     }))
 
     this.setState(prevState => ({
@@ -75,6 +75,14 @@ class MoneyManager extends Component {
     this.setState({
       type: event.target.value,
     })
+  }
+
+  onDeleteTransactionItem = id => {
+    this.setState(prevState => ({
+      transactionList: prevState.transactionList.filter(
+        eachTransaction => eachTransaction.id !== id,
+      ),
+    }))
   }
 
   render() {
@@ -148,6 +156,7 @@ class MoneyManager extends Component {
             <TransactionItem
               key={eachTransaction.id}
               eachTransaction={eachTransaction}
+              onDeleteTransactionItem={this.onDeleteTransactionItem}
             />
           ))}
         </ul>
