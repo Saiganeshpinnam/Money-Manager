@@ -4,6 +4,7 @@ import './index.css'
 const transactionList = props => {
   const {eachTransaction, onDeleteTransactionItem} = props
   const {title, amount, type, isTransactionAdded, id} = eachTransaction
+
   const onDeleteItem = () => {
     onDeleteTransactionItem(id)
   }

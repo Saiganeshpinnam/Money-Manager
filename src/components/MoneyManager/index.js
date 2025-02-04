@@ -41,7 +41,6 @@ class MoneyManager extends Component {
       title,
       amount,
       type,
-      isTransactionAdded: false,
     }
 
     this.setState(prevState => ({
@@ -49,13 +48,6 @@ class MoneyManager extends Component {
       title: '',
       amount: '',
       type: 'INCOME',
-    }))
-
-    this.setState(prevState => ({
-      transactionList: prevState.transactionList.map(eachTransaction => ({
-        ...eachTransaction,
-        isTransactionAdded: !eachTransaction.isTransactionAdded,
-      })),
     }))
   }
 
@@ -86,7 +78,7 @@ class MoneyManager extends Component {
   }
 
   render() {
-    const {transactionList} = this.state
+    const {transactionList, newTransaction} = this.state
     return (
       <div className="bg-container">
         <div className="money-manager-card-container">
@@ -97,7 +89,11 @@ class MoneyManager extends Component {
           </p>
         </div>
 
-        <MoneyDetails transactionTypeOptions={transactionTypeOptions} />
+        <MoneyDetails
+          transactionTypeOptions={transactionTypeOptions}
+          newTransaction={newTransaction}
+          transactionList={transactionList}
+        />
 
         <div className="add-transaction-container">
           <h1 className="add-transaction-heading">Add Transaction</h1>

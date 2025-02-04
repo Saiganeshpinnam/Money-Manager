@@ -1,8 +1,38 @@
 // Write your code here
+
 import './index.css'
 
 const MoneyDetails = props => {
-  const {transactionTypeOptions} = props
+  const {transactionsList, transactionTypeOptions} = props
+
+  // const income = () => {
+  //   let incomeAmount = 0
+  //   transactionsList.forEach(eachTransaction => {
+  //     if (eachTransaction.type === transactionTypeOptions[0].displayText) {
+  //       incomeAmount += eachTransaction.amount
+  //     }
+  //   })
+  //   return incomeAmount
+  // }
+
+  // const expenses = () => {
+  //   let expensesAmount = 0
+  //   transactionsList.forEach(eachTransaction => {
+  //     if (eachTransaction.type === transactionTypeOptions[1].displayText) {
+  //       expensesAmount += eachTransaction.amount
+  //     }
+  //   })
+  //   return expensesAmount
+  // }
+
+  const income = transactionsList
+    .filter(transaction => transaction.type === 'Income')
+    .reduce((acc, curr) => acc + parseInt(curr.amount), 0)
+  const expenses = transactionsList
+    .filter(transaction => transaction.type === 'Expenses')
+    .reduce((acc, curr) => acc + parseInt(curr.amount), 0)
+
+  const balance = income - expenses
 
   return (
     <div className="money-details-bg-container">
@@ -14,7 +44,9 @@ const MoneyDetails = props => {
         />
         <div className="current-status-container">
           <p className="your-status">Your Balance</p>
-          <p className="amount-status">Rs.0</p>
+          <p className="amount-status" data-testid="balanceAmount">
+            Rs. {balance}
+          </p>
         </div>
       </div>
 
@@ -28,7 +60,9 @@ const MoneyDetails = props => {
           <p className="your-status">
             Your {transactionTypeOptions[0].displayText}
           </p>
-          <p className="amount-status">Rs.0</p>
+          <p className="amount-status" data-testid="incomeAmount">
+            Rs. {income}
+          </p>
         </div>
       </div>
 
@@ -42,7 +76,9 @@ const MoneyDetails = props => {
           <p className="your-status">
             Your {transactionTypeOptions[1].displayText}
           </p>
-          <p className="amount-status">Rs.0</p>
+          <p className="amount-status" data-testid="expensesAmount">
+            Rs. {expenses}
+          </p>
         </div>
       </div>
     </div>
